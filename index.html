@@ -219,8 +219,34 @@
       }
     });
 
+    // Demo weather data for testing
+    const demoData = {
+      'london': { temp: 16, desc: 'Partly Cloudy', humidity: 65, wind: 8, pressure: 1013 },
+      'new york': { temp: 22, desc: 'Sunny', humidity: 45, wind: 5, pressure: 1015 },
+      'tokyo': { temp: 20, desc: 'Clear', humidity: 55, wind: 6, pressure: 1012 },
+      'paris': { temp: 18, desc: 'Rainy', humidity: 75, wind: 10, pressure: 1010 },
+      'sydney': { temp: 25, desc: 'Sunny', humidity: 50, wind: 7, pressure: 1014 }
+    };
+
     async function getWeather(city = 'London') {
       const apiKey = "YOUR_API_KEY_HERE"; // Replace with your OpenWeatherMap API key
+      const cityLower = city.toLowerCase();
+
+      // Use demo data if no API key is set
+      if (apiKey === "YOUR_API_KEY_HERE") {
+        const weather = demoData[cityLower];
+        if (weather) {
+          document.getElementById('cityName').innerHTML = city;
+          document.getElementById('temperature').innerHTML = `${weather.temp}°`;
+          document.getElementById('description').innerHTML = weather.desc;
+          document.getElementById('humidity').innerHTML = `${weather.humidity}%`;
+          document.getElementById('wind').innerHTML = `${weather.wind} m/s`;
+          document.getElementById('pressure').innerHTML = weather.pressure;
+        } else {
+          document.getElementById('description').innerHTML = 'City not found (try London, New York, Tokyo, Paris, or Sydney)';
+        }
+        return;
+      }
 
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
