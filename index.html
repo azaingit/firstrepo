@@ -130,16 +130,12 @@
     }
 
     .search-container {
-      display: none;
+      display: flex;
       position: absolute;
       top: 20px;
       left: 20px;
       gap: 10px;
       z-index: 10;
-    }
-
-    .search-container.active {
-      display: flex;
     }
 
     .search-container input {
@@ -189,7 +185,6 @@
       </div>
 
       <div class="right-section">
-        <button class="search-btn" onclick="toggleSearch()">🔍</button>
         
         <div class="weather-detail">
           <div class="detail-label">Humidity</div>
@@ -210,16 +205,10 @@
   </div>
 
   <script>
-    function toggleSearch() {
-      const searchContainer = document.getElementById('searchContainer');
-      searchContainer.classList.toggle('active');
-    }
-
     function performSearch() {
       const city = document.getElementById('city').value.trim();
       if (city) {
         getWeather(city);
-        document.getElementById('searchContainer').classList.remove('active');
         document.getElementById('city').value = '';
       }
     }
