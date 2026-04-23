@@ -237,7 +237,8 @@
       if (apiKey === "YOUR_API_KEY_HERE") {
         const weather = demoData[cityLower];
         if (weather) {
-          document.getElementById('cityName').innerHTML = city;
+          const capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+          document.getElementById('cityName').innerHTML = capitalizedCity;
           document.getElementById('temperature').innerHTML = `${weather.temp}°`;
           document.getElementById('description').innerHTML = weather.desc;
           document.getElementById('humidity').innerHTML = `${weather.humidity}%`;
